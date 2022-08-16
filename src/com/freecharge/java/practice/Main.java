@@ -44,13 +44,14 @@ public class Main {
 	public static void searchCarByName(Car[] cars,String name) throws CarNotFoundException {
 		boolean found;
 		found=false;
+		System.out.println("Searching car by name.....");
 		for(int i=0;i<cars.length;i++) {
 			if(cars[i].name==name) {
 				found=true;
 				cars[i].displayCarDetails();
 			}
 		}
-		if(!found && name==null) {
+		if(!found || name==null) {
 			throw new CarNotFoundException("Car not found with this name");
 		}
 	}
@@ -58,36 +59,42 @@ public class Main {
 	public static void searchCarByBrand(Car[] cars,String brand) throws CarNotFoundException {
 		boolean found;
 		found=false;
+		System.out.println("Searching car by brand.....");
 		for(int i=0;i<cars.length;i++) {
 			if(cars[i].company==brand) {
+				found=true;
 				cars[i].displayCarDetails();
 			}
 		}
-		if(!found && brand==null) {
+		if(!found || brand==null) {
 			throw new CarNotFoundException("Car not found with this brand");
 		}
 	}
 	public static void searchCarByPrice(Car[] cars,double minPrice,double maxPrice) throws CarNotFoundException {
 		boolean found;
 		found=false;
+		System.out.println("Searching car by price range.....");
 		for(int i=0;i<cars.length;i++) {
 			if(cars[i].price>=minPrice && cars[i].price<=maxPrice) {
+				found=true;
 				cars[i].displayCarDetails();
 			}
 		}
-		if(!found && minPrice<0 && maxPrice<0) {
+		if(!found || minPrice<0 || maxPrice<0) {
 			throw new CarNotFoundException("Car not found with this price range");
 		}
 	}
 	public static void searchCarByRating(Car[] cars,int rating) throws CarNotFoundException {
 		boolean found;
 		found=false;
+		System.out.println("Searching car by rating.....");
 		for(int i=0;i<cars.length;i++) {
 			if(cars[i].rating==rating) {
+				found=true;
 				cars[i].displayCarDetails();
 			}
 		}
-		if(!found && rating<0) {
+		if(!found || rating<0) {
 			throw new CarNotFoundException("Car not found with this rating");
 		}
 	}
