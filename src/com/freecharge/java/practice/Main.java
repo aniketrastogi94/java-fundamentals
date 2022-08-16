@@ -21,38 +21,82 @@ public class Main {
 			User user = new User("Aniket","aniketrastogi94@gmail.com",1,"Gold","9811478641");
 			
 			// searching with name
-			for(int i=0;i<5;i++) {
-				if(cars[i].name=="R1") {
-					cars[i].displayCarDetails();
-				}
-			}
+			searchCarByName(cars,"R1");
+			
 			//searching with brand
-			for(int i=0;i<5;i++) {
-				if(cars[i].company=="AUDI") {
-					cars[i].displayCarDetails();
-				}
-			}
+			searchCarByBrand(cars,"AUDI");
+			
 			// searching with price range
-			for(int i=0;i<5;i++) {
-				if(cars[i].price>=653647.0 && cars[i].price<=1500000.0) {
-					cars[i].displayCarDetails();
-				}
-			}
+			searchCarByPrice(cars,653647.0,1500000.0);
+			
 			// searching with rating
-			for(int i=0;i<5;i++) {
-				if(cars[i].rating==5) {
-					cars[i].displayCarDetails();
-				}
-			}
+			searchCarByRating(cars,5);
+			
 			//final discount
-			for(int i=0;i<5;i++) {
-				System.out.println(cars[i].finalPrice(user.membership));
-				
-			}
+			findFinalPrice(cars,user.membership);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Something went wrong");
 		}
 		
+	}
+	public static void searchCarByName(Car[] cars,String name) {
+		boolean found;
+		found=false;
+		for(int i=0;i<cars.length;i++) {
+			if(cars[i].name==name) {
+				found=true;
+				cars[i].displayCarDetails();
+			}
+		}
+		if(!found && name==null) {
+			throw new CarNotFoundException("Car not found with this name");
+		}
+	}
+	
+	public static void searchCarByBrand(Car[] cars,String brand) {
+		boolean found;
+		found=false;
+		for(int i=0;i<cars.length;i++) {
+			if(cars[i].company==brand) {
+				cars[i].displayCarDetails();
+			}
+		}
+		if(!found && brand==null) {
+			throw new CarNotFoundException("Car not found with this brand");
+		}
+	}
+	public static void searchCarByPrice(Car[] cars,double minPrice,double maxPrice) {
+		boolean found;
+		found=false;
+		for(int i=0;i<cars.length;i++) {
+			if(cars[i].price>=minPrice && cars[i].price<=maxPrice) {
+				cars[i].displayCarDetails();
+			}
+		}
+		if(!found && minPrice<0 && maxPrice<0) {
+			throw new CarNotFoundException("Car not found with this price range");
+		}
+	}
+	public static void searchCarByRating(Car[] cars,int rating) {
+		boolean found;
+		found=false;
+		for(int i=0;i<cars.length;i++) {
+			if(cars[i].rating==rating) {
+				cars[i].displayCarDetails();
+			}
+		}
+		if(!found && rating<0) {
+			throw new CarNotFoundException("Car not found with this rating");
+		}
+	}
+	public static void findFinalPrice(Car[] cars,String memberShip) {
+		if(memberShip==null) {
+			System.out.println("Invalid membership type");
+		}
+		for(int i=0;i<cars.length;i++) {
+			System.out.println(cars[i].finalPrice(memberShip));
+		}
 	}
 }
